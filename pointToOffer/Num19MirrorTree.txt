@@ -1,0 +1,32 @@
+public class MirrorTree{
+	/**
+	运用层次遍历的方法，每遍历到一个节点，如果该节点不是左右子树均为空，则交换左右子树
+	*/
+	LinkedList<TreeNode> list = new LinkedList<TreeNode>();
+	public void mirrorTree(TreeNode root){
+		if(root == null)
+			return;
+		list.add(root);
+		while(!list.isEmpty()){
+			TreeNode temp = list.pollFirst();
+			if(!(temp.left == null && temp.right == null)){
+				if(temp.left != null && temp.right != null){
+					list.addLast(temp.right);
+					list.addLast(temp.left);
+					TreeNode val = temp.left;
+					temp.left = temp.right;
+					temp.right = val;
+				}
+				else if(temp.left != null){
+					list.addLast(temp.left);
+					temp.right = temp.left;
+					temp.left = null;
+				}
+				else{
+					list.addLast(temp.right);
+					temp.left = temp.right;
+					temp.right = null;
+				}
+			}
+		}
+	}
