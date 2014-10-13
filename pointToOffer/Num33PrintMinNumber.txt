@@ -1,0 +1,19 @@
+/*
+主要问题是需要解决字串排序的问题，需要自己写类继承Comparable接口，实现compareTo方法
+*/
+class Compare implements Comparable<Compare>{
+	String s;
+	@Override
+	public int compareTo(Compare ps){
+		String s1 = this.s + ps.s;
+		String s2 = ps.s + this.s;
+		if(s1.compareTo(s2)==0){
+			return 0;
+		}
+		else if(s1.compareTo(s2)>0){
+			return 1;
+		}
+		else
+			return -1;
+	}
+}
