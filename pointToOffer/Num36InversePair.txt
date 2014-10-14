@@ -1,0 +1,45 @@
+public class InversePair {
+	int inverseCount = 0;
+	public void inversePair(int[] A){
+		int len = A.length;
+		if(len > 1){
+			int first = len / 2;
+			int[] firstHalf = new int[first];
+			System.arraycopy(A, 0, firstHalf, 0, first);
+			inversePair(firstHalf);
+			int second = len - first;
+			int[] secondHalf = new int[second];
+			System.arraycopy(A, first, secondHalf, 0, second);
+			inversePair(secondHalf);
+			count(firstHalf,secondHalf,A);
+		}
+	}
+	public void count(int[] firstHalf,int[] secondHalf, int[] A){
+		int index1 = A.length-1;
+		int index2 = firstHalf.length - 1;
+		int index3 = secondHalf.length - 1;
+		while(index2 >= 0 && index3 >= 0){
+			if(firstHalf[index2] >secondHalf[index3]){
+				inverseCount+=index3 + 1;
+				A[index1] = firstHalf[index2];
+				index1--;
+				index2--;
+			}
+			else{
+				A[index1] = secondHalf[index3];
+				index1--;
+				index3--;
+			}
+		}
+		while(index2>=0){
+			A[index1] = firstHalf[index2];
+			index1--;
+			index2--;
+		}
+		while(index3>=0){
+			A[index1] = secondHalf[index3];
+			index1--;
+			index3--;
+		}
+	}
+}
